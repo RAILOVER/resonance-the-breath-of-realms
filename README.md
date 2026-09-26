@@ -1,6 +1,19 @@
 # Resonance - The Breath of Realms
 
-A contemplative first-person zero-HUD exploration game where your voice reshapes procedural desert, snow, and forest worlds powered by Google Gemini AI.
+A contemplative first-person zero-HUD exploration game where your voice reshapes procedural desert, snow, and forest worlds powered by **Gradium AI Voice** and **Google Gemini 2.5 Flash**.
+
+## Features & Voice Mechanics
+
+- **Voice Frequency Detection (Gradium AI)**:
+  - Deep grave voices (55 - 185 Hz) awaken the sleeping desert monoliths.
+  - High harmonics (>= 420 Hz) shatter brutalist crystal barriers.
+  - Intense vocal pulses trigger shockwaves.
+- **Voice Commands & Word Interpretation (Gradium STT)**:
+  - Speak `"take"` / `"prends"` to pick up mystical items.
+  - Speak `"circle"` / `"cercle"` to transmute relics.
+  - Speak `"jump"` / `"saute"` to ascend.
+- **Contemplative Lore & Whispers (Google Gemini)**:
+  - Ancient whispers generated based on your voice frequency and biome location.
 
 ## Controls
 
@@ -8,18 +21,16 @@ A contemplative first-person zero-HUD exploration game where your voice reshapes
 - **Move**: `W, A, S, D` or `Z, Q, S, D` / Arrow keys
 - **Look**: Mouse movement
 - **Jump**: `Spacebar`
-- **Voice / Sing**: Speak or sing into your microphone (low grave tones awaken desert monoliths, high harmonics shatter ice barriers).
+- **Voice**: Speak or sing into your microphone
 
 ### Mobile & Tablet (iOS / Android)
-- **Left Thumb**: Semi-transparent virtual joystick for walking in all directions.
-- **Right Thumb**: Drag to look around and orient your view.
-- **▲ JUMP Button**: Tap to jump / ascend.
-- **Microphone**: Automatically captures voice on mobile via Web Audio API.
+- **Left Thumb**: Semi-transparent virtual joystick for movement
+- **Right Thumb**: Drag to look around
+- **▲ JUMP Button**: Tap to jump / ascend
+- **Microphone**: Hands-free vocal detection and command recognition
 
-## Vercel Deployment
+## Environment Variables for Vercel
 
-1. Import this repository directly into [Vercel](https://vercel.com/new).
-2. (Optional) Set the `GEMINI_API_KEY` environment variable in Vercel **Settings > Environment Variables** with your Google AI Studio API key.
-3. Click **Deploy**!
-
-All serverless API routes (`/api/gemini/...` and `/api/gradium/...`) run out-of-the-box with zero configuration needed.
+In your Vercel Project Settings > **Environment Variables**, add:
+1. `GEMINI_API_KEY`: Your Google AI Studio API key
+2. `GRADIUM_API_KEY`: Your Gradium API key (`gsk_...`)
