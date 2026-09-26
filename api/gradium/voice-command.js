@@ -102,13 +102,21 @@ export default async function handler(req, res) {
   const geminiKey = process.env.GEMINI_API_KEY;
   if (audioBase64 && geminiKey) {
     try {
+      const cleanMimeType = (mimeType || 'audio/webm').split(';')[0].trim();
       const geminiUrl = `${CONFIG.GEMINI_BASE_URL}/${CONFIG.GEMINI_MODEL}:generateContent?key=${geminiKey}`;
-      const promptText = 'Listen to this audio recorded by the player. Transcribe the words exactly in 1 to 5 words. If you hear words like take, prend, cercle, circle, or jump, write them clearly.';
+      const promptText = `Transcribe the spoken audio recorded from the player's microphone in Resonance.
+Key gameplay words to recognize:
+- "circle", "cercle", "rond", "transmute"
+- "take", "take it", "prend", "prends", "grab"
+- "jump", "saute"
+
+If the player spoke any of these words or variations, transcribe them accurately (e.g. "circle" or "take it").
+If other speech is present, transcribe what was said in 1 to 4 words.
+If there is only background static, noise, or silence, reply with "(silence)".`;
 
       console.info('[GenAI.call] Calling Gemini with parameters:', {
         model: CONFIG.GEMINI_MODEL,
-        prompt: promptText,
-        mimeType: mimeType,
+        cleanMimeType: cleanMimeType,
         inlineDataLength: audioBase64.length
       });
 
@@ -122,7 +130,7 @@ export default async function handler(req, res) {
               { text: promptText },
               {
                 inlineData: {
-                  mimeType: mimeType,
+                  mimeType: cleanMimeType,
                   data: audioBase64
                 }
               }
@@ -130,7 +138,7 @@ export default async function handler(req, res) {
           }],
           generationConfig: {
             temperature: 0.1,
-            maxOutputTokens: 50
+            maxOutputTokens: 60
           }
         })
       });
@@ -138,13 +146,16 @@ export default async function handler(req, res) {
       if (geminiRes.ok) {
         const data = await geminiRes.json();
         const candidate = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-        recognizedText = candidate.trim().replace(/[."']/g, '');
+        recognizedText = candidate.trim().replace(/[."'\n]/g, '');
         command = extractCommandFromText(recognizedText);
 
         console.info('[GenAI.output] Gemini transcribed audio successfully:', {
           recognizedText: recognizedText,
           detectedCommand: command
         });
+      } else {
+        const errBody = await geminiRes.text();
+        console.warn(`[GenAI.call] Gemini returned status: ${geminiRes.status}, body: ${errBody}`);
       }
     } catch (err) {
       console.error('[Gradium.voiceCommand] Audio transcription fallback:', err.message);

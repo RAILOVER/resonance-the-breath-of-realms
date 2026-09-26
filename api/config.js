@@ -7,7 +7,7 @@
 
 export const CONFIG = {
   // AI Models
-  GEMINI_MODEL: 'gemini-2.5-flash',
+  GEMINI_MODEL: 'gemini-3.8-flash',
   GEMINI_BASE_URL: 'https://generativelanguage.googleapis.com/v1beta/models',
   
   // Gradium AI Voice Infrastructure
@@ -24,7 +24,7 @@ export const CONFIG = {
 
   // Recognized Voice Commands for Game Interactions
   VOICE_COMMANDS: {
-    TAKE: ['take', 'prend', 'prendre', 'grab', 'attrape', 'ramasse', 'sheet'],
+    TAKE: ['take it', 'take', 'prend', 'prendre', 'grab', 'attrape', 'ramasse', 'sheet'],
     CIRCLE: ['circle', 'cercle', 'rond', 'transmute', 'transmuter', 'forge', 'sphere'],
     JUMP: ['jump', 'saute', 'monter', 'vole', 'ascend'],
     ECHO: ['echo', 'resonance', 'voix', 'parle', 'chante']
