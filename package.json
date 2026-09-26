@@ -1,0 +1,10 @@
+{
+  "name": "resonance-the-breath-of-realms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A contemplative first-person zero-HUD exploration game where your voice reshapes procedural realms powered by Gemini AI.",
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {}
+}
