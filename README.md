@@ -6,7 +6,16 @@ For the game music, using headphones is strongly recommended. I used Space DJ in
 
 The game features 3 distinct levels:
 - **The Tutorial**: where everything is clearly guided and explained.
-- **The Desert Realm**: where specific vocal actions must be performed in front of each stele, with an adjacent riddle acting as a hint.
+- **The Desert Realm**: where distinct interactions are required in front of each stele (one is vocal, one relies on camera orientation, and the last one uses player movements), with an adjacent riddle acting as a hint for each.
 - **The Ice Realm**: the most challenging part to build, as I wanted to integrate Gradium vocal interpretation. I intentionally displayed the live transcript so you can see which words are recognized. Say **"take it"** next to the ice block, and **"circle"** to transmute the relic into a circle and finish the game by walking into the white booth.
 
 Enjoy! :)
+
+---
+
+## Tech Stack
+- **3D Engine & Client**: Three.js, WebGL, React, Web Audio API, Virtual Touch Controls
+- **Voice & Acoustic Intelligence**: Gradium AI Voice Platform (STT & acoustic frequency analysis)
+- **Generative AI & Multimodal**: Google Gemini 3.8 Flash (voice transcription & contextual lore generation)
+- **Adaptive Music**: Space DJ (Google AI Studio)
+- **Deployment & Serverless API**: Vercel Serverless Functions (Node.js)
